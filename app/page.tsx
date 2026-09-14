@@ -1,6 +1,66 @@
 import Link from "next/link";
-import { ArrowRight, Camera, Clapperboard, Plane, Radio, Aperture, MonitorPlay } from "lucide-react";
+import { ArrowRight, Camera, Clapperboard, Plane, Radio, Aperture, MonitorPlay, Workflow, Tv, Film } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { services, packages, whatsapp } from "@/lib/data";
-const icons=[Camera,Clapperboard,Plane,Aperture,Radio,MonitorPlay];
-export default function Home(){return <main><section className="hero"><div className="hero-media"><div className="hero-glow"/></div><div className="hero-content"><img src="/logo/om-logo.svg" className="hero-logo" alt="OM Media & Productions"/><p className="eyebrow">WEDDING FILMS • PHOTOGRAPHY • LIVE PRODUCTION</p><h1>Every moment.<br/><i>Made timeless.</i></h1><p className="hero-copy">Premium visual storytelling for weddings and celebrations in Varanasi and beyond.</p><div className="actions"><Link className="btn gold" href="/portfolio">View Our Work <ArrowRight size={16}/></Link><a className="btn outline" href={whatsapp} target="_blank" rel="noreferrer">Get a Quote</a></div></div><div className="scroll">SCROLL TO EXPLORE</div></section><Reveal><section className="intro section"><p className="eyebrow">OM MEDIA & PRODUCTIONS</p><h2>We don't just capture weddings.<br/><span>We produce the memories.</span></h2><p>From the first frame to the final render, our production team brings photography, cinematography, aerial coverage, live broadcasting and premium album production under one roof.</p></section></Reveal><section className="section"><Reveal><div className="section-head"><div><p className="eyebrow">WHAT WE DO</p><h2>Production, <i>from frame to film.</i></h2></div><Link href="/services" className="text-link">All Services <ArrowRight size={16}/></Link></div></Reveal><div className="service-grid">{services.slice(0,6).map(([t,d],i)=>{const I=icons[i%icons.length];return <Reveal key={t}><Link href={`/services/${t.toLowerCase().replaceAll(" ","-")}`} className="service-card"><I/><span className="number">0{i+1}</span><h3>{t}</h3><p>{d}</p><ArrowRight className="card-arrow" size={18}/></Link></Reveal>})}</div></section><Reveal><section className="showcase"><div><p className="eyebrow">CINEMATIC SHOWREEL</p><h2>Moments that<br/><i>move.</i></h2><p>Our visual language is cinematic, emotional and built to be remembered.</p><Link className="btn outline" href="/portfolio">Explore Portfolio</Link></div><div className="film-frame"><div className="play">▶</div><span>SHOWREEL / 2026</span></div></section></Reveal><section className="section dark-section"><Reveal><div className="section-head"><div><p className="eyebrow">PACKAGES</p><h2>Choose your <i>story.</i></h2></div><Link href="/packages" className="text-link">View Packages <ArrowRight size={16}/></Link></div></Reveal><div className="package-grid">{packages.map((p,i)=><Reveal key={p.name}><article className={`package-card ${i===2?"featured":""}`}><span className="package-no">0{i+1}</span><h3>{p.name}</h3><p>{p.note}</p><ul>{p.items.slice(0,6).map(x=><li key={x}>{x}</li>)}</ul><Link href="/contact" className="text-link">Request Quote <ArrowRight size={16}/></Link></article></Reveal>)}</div></section><Reveal><section className="varanasi"><div className="varanasi-overlay"/><div className="varanasi-copy"><p className="eyebrow">BASED IN VARANASI</p><h2>Rooted in tradition.<br/><i>Made for today.</i></h2><p>Available for celebrations across India.</p><Link className="btn gold" href="/contact">Start Your Story <ArrowRight size={16}/></Link></div></section></Reveal><Reveal><section className="cta section"><p className="eyebrow">LET'S CREATE</p><h2>Your day deserves<br/><i>a beautiful film.</i></h2><div className="actions"><a className="btn gold" href={whatsapp} target="_blank" rel="noreferrer">Chat on WhatsApp</a><Link className="btn outline" href="/contact">Request a Quote</Link></div></section></Reveal></main>}
+import { services, packages, whatsapp, portfolioConfig, siteConfig } from "@/lib/data";
+
+const icons = [Camera, Clapperboard, Plane, Aperture, Radio, MonitorPlay];
+
+export default function Home() {
+  return <main>
+    <section className="hero">
+      <div className="hero-media"><div className="hero-glow" /></div>
+      <div className="hero-content">
+        <img src="/logo/om-logo.svg" className="hero-logo" alt="OM Media & Productions" />
+        <p className="eyebrow">WEDDING FILMS • PHOTOGRAPHY • LIVE PRODUCTION</p>
+        <h1>Every moment.<br/><i>Made timeless.</i></h1>
+        <p className="hero-copy">{siteConfig.tagline} Premium visual storytelling for weddings and celebrations in Varanasi and beyond.</p>
+        <div className="actions">
+          <Link className="btn gold" href="/portfolio">View Our Work <ArrowRight size={16}/></Link>
+          <a className="btn outline" href={whatsapp} target="_blank" rel="noreferrer">Get a Quote</a>
+        </div>
+      </div>
+      <div className="scroll">SCROLL TO EXPLORE</div>
+    </section>
+
+    <Reveal><section className="intro section">
+      <p className="eyebrow">{siteConfig.secondaryMessage.toUpperCase()}</p>
+      <h2>We don't just capture weddings.<br/><span>We produce the memories.</span></h2>
+      <p>From the first frame to the final render, our production team brings photography, cinematography, aerial coverage, live broadcasting and premium album production under one roof.</p>
+    </section></Reveal>
+
+    <section className="section">
+      <Reveal><div className="section-head"><div><p className="eyebrow">WHAT WE DO</p><h2>Production, <i>from frame to film.</i></h2></div><Link href="/services" className="text-link">All Services <ArrowRight size={16}/></Link></div></Reveal>
+      <div className="service-grid">{services.slice(0, 6).map((service, i) => { const I = icons[i % icons.length]; return <Reveal key={service.id}><Link href={`/services/${service.id}`} className="service-card"><I/><span className="number">0{i + 1}</span><h3>{service.title}</h3><p>{service.description}</p><ArrowRight className="card-arrow" size={18}/></Link></Reveal>; })}</div>
+    </section>
+
+    <Reveal><section className="section">
+      <div className="section-head"><div><p className="eyebrow">FEATURED PORTFOLIO</p><h2>Stories we <i>love to tell.</i></h2></div><Link href="/portfolio" className="text-link">View Portfolio <ArrowRight size={16}/></Link></div>
+      <div className="portfolio-grid">{portfolioConfig.projects.map((project) => <div className="portfolio-placeholder" key={project.id}><span>{project.category.toUpperCase()} • {project.title.toUpperCase()}</span></div>)}</div>
+    </section></Reveal>
+
+    <Reveal><section className="showcase">
+      <div><p className="eyebrow">CINEMATIC SHOWREEL</p><h2>Moments that<br/><i>move.</i></h2><p>Our visual language is cinematic, emotional and built to be remembered.</p><Link className="btn outline" href="/portfolio">Explore Portfolio</Link></div>
+      <div className="film-frame"><div className="play">▶</div><span>SHOWREEL / 2026</span></div>
+    </section></Reveal>
+
+    <Reveal><section className="section dark-section">
+      <div className="section-head"><div><p className="eyebrow">PRODUCTION CAPABILITIES</p><h2>One team.<br/><i>Complete production.</i></h2></div></div>
+      <div className="service-grid">
+        {[['Capture','Photography, cinematography, drone, gimbal and crane.'],['Live','Multi-camera broadcasting and LED / Wall TV production.'],['Post','Editing, colour grading, sound design, rendering and delivery.'],['Deliver','Premium albums, frames, pen drives, highlights and teasers.']].map(([title, text], i) => <article className="service-card" key={title}><span className="number">0{i+1}</span><h3>{title}</h3><p>{text}</p></article>)}
+      </div>
+    </section></Reveal>
+
+    <section className="section dark-section">
+      <Reveal><div className="section-head"><div><p className="eyebrow">PACKAGES</p><h2>Choose your <i>story.</i></h2></div><Link href="/packages" className="text-link">View Packages <ArrowRight size={16}/></Link></div></Reveal>
+      <div className="package-grid">{packages.map((p, i) => <Reveal key={p.name}><article className={`package-card ${i === 2 ? "featured" : ""}`}><span className="package-no">0{i + 1}</span><h3>{p.name}</h3><p>{p.note}</p><ul>{p.items.slice(0, 6).map(x => <li key={x}>{x}</li>)}</ul><Link href="/contact" className="text-link">Request Quote <ArrowRight size={16}/></Link></article></Reveal>)}</div>
+    </section>
+
+    <Reveal><section className="section two-col">
+      <div><p className="eyebrow">OUR PROCESS</p><h2>Planned with care.<br/><i>Delivered with precision.</i></h2></div>
+      <div><p><b>01 — PLAN</b><br/>Share your date, venue, functions and deliverables.</p><p><b>02 — PRODUCE</b><br/>Our team coordinates capture, live production and data management.</p><p><b>03 — CRAFT</b><br/>Editing, grading, sound, albums and final masters are handled as one workflow.</p><p><b>04 — DELIVER</b><br/>Receive your final films, photographs and physical deliverables.</p></div>
+    </section></Reveal>
+
+    <Reveal><section className="varanasi"><div className="varanasi-overlay"/><div className="varanasi-copy"><p className="eyebrow">BASED IN VARANASI</p><h2>Rooted in tradition.<br/><i>Made for today.</i></h2><p>Available for celebrations across India.</p><Link className="btn gold" href="/contact">Start Your Story <ArrowRight size={16}/></Link></div></section></Reveal>
+    <Reveal><section className="cta section"><p className="eyebrow">LET'S CREATE</p><h2>Your day deserves<br/><i>a beautiful film.</i></h2><div className="actions"><a className="btn gold" href={whatsapp} target="_blank" rel="noreferrer">Chat on WhatsApp</a><Link className="btn outline" href="/contact">Request a Quote</Link></div></section></Reveal>
+  </main>;
+}
