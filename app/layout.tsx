@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./reference.css";
+import "./logo-brand.css";
 import { site, siteConfig } from "@/lib/data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
   title: { default: "OM Media & Productions | Wedding Films & Photography | Varanasi", template: "%s | OM Media & Productions" },
   description: "Premium wedding photography, cinematography, drone, gimbal, crane, live broadcasting, editing and album production in Varanasi.",
   keywords: ["Wedding Photographer Varanasi", "Wedding Cinematography Varanasi", "Wedding Videography Varanasi", "Drone Wedding Photography Varanasi", "Live Wedding Broadcasting Varanasi"],
-  openGraph: { title: "OM Media & Productions", description: "Wedding Films • Photography • Live Production", type: "website", locale: "en_IN", url: baseUrl }
+  openGraph: { title: "OM Media & Productions", description: "Wedding Films • Photography • Live Production", type: "website", locale: "en_IN", url: baseUrl },
+  icons: { icon: "/logo/om-logo.svg", shortcut: "/logo/om-logo.svg", apple: "/logo/om-logo.svg" }
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const sameAs = Object.values(siteConfig.socials).filter(Boolean);
