@@ -78,7 +78,6 @@ export default function FutureHero() {
         ctx.fill();
       }
 
-      if (!reduced && frame < 2) resize();
       raf = requestAnimationFrame(render);
     };
 
@@ -104,9 +103,9 @@ export default function FutureHero() {
       <div className={styles.vignette} aria-hidden="true" />
 
       <div className={styles.scene} aria-hidden="true">
-        <div className={styles.orbit orbitOne}><span /></div>
-        <div className={styles.orbit orbitTwo}><span /></div>
-        <div className={styles.orbit orbitThree}><span /></div>
+        <div className={`${styles.orbit} ${styles.orbitOne}`}><span /></div>
+        <div className={`${styles.orbit} ${styles.orbitTwo}`}><span /></div>
+        <div className={`${styles.orbit} ${styles.orbitThree}`}><span /></div>
         <div className={styles.lens}>
           <div className={styles.lensOuter} />
           <div className={styles.lensInner} />
